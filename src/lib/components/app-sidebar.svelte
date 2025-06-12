@@ -150,7 +150,7 @@
 					{#snippet child({ props })}
 						<a href="##" {...props}>
 							<Avatar.Root class="size-8 rounded-lg">
-								<Avatar.Image src={"/mc.png"} alt={"McEasy"} />
+								<Avatar.Image src={"/favicon.png"} alt={"McEasy"} />
 								<Avatar.Fallback class="rounded-lg">ME</Avatar.Fallback>
 							</Avatar.Root>
 							<div class="grid flex-1 text-left text-sm leading-tight">

@@ -7,6 +7,10 @@
   export let data;
 </script>
 
+<svelte:head>
+	<title>DevSecOps</title>
+</svelte:head>
+
 <Sidebar.Provider>
 	<AppSidebar user={{ ...data.user, email: data.user.email ?? "" }} />
 	<Sidebar.Inset>
