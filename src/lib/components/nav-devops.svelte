@@ -2,6 +2,7 @@
 	import * as Collapsible from "$lib/components/ui/collapsible/index.js";
 	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
 	import ChevronRightIcon from "@lucide/svelte/icons/chevron-right";
+	import Rocket from "@lucide/svelte/icons/rocket";
 
 	let {
 		items,
@@ -20,7 +21,18 @@
 </script>
 
 <Sidebar.Group>
-	<Sidebar.GroupLabel>Platforms</Sidebar.GroupLabel>
+	<Sidebar.Menu>
+		<Sidebar.MenuItem class="flex items-center gap-2 mb-2">
+			<a href="/deployment" class="flex items-center gap-2 w-full">
+				<Sidebar.MenuButton class="cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground min-w-8 duration-200 ease-linear" tooltipContent="Quick create">
+					<Rocket class="size-4" />
+					<span>Quick Deployment</span>
+				</Sidebar.MenuButton>
+			</a>
+		</Sidebar.MenuItem>
+	</Sidebar.Menu>
+
+	<Sidebar.GroupLabel>DevOps</Sidebar.GroupLabel>
 	<Sidebar.Menu>
 		{#each items as mainItem (mainItem.title)}
 			<Collapsible.Root open={mainItem.isActive}>

@@ -10,12 +10,40 @@
 	import SquareTerminalIcon from "@lucide/svelte/icons/square-terminal";
 
 	const data = {
+		navDevOps:[
+			{
+				title: "Dashboard",
+				url: "/",
+				icon: ChartPieIcon,
+				isActive: true,
+			},
+			{
+				title: "Services",
+				url: "/services",
+				icon: FrameIcon,
+			},
+			{
+				title: "Digest",
+				url: "/digest",
+				icon: MapIcon,
+			},
+			{
+				title: "Monitoring",
+				url: "https://monitoring.mceasy.com",
+				icon: SquareTerminalIcon,
+			},
+			{
+				title: "Settings",
+				url: "#",
+				icon: Settings2Icon,
+			},
+		],
 		navMain: [
 			{
 				title: "Playground",
 				url: "#",
 				icon: SquareTerminalIcon,
-				isActive: true,
+				isActive: false,
 				items: [
 					{
 						title: "History",
@@ -131,13 +159,13 @@
 
 <script lang="ts">
 	import NavMain from "./nav-main.svelte";
+	import NavDevops from "./nav-devops.svelte";
 	import NavProjects from "./nav-projects.svelte";
 	import NavSecondary from "./nav-secondary.svelte";
 	import NavUser from "./nav-user.svelte";
 	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
 	import type { ComponentProps } from "svelte";
 	import * as Avatar from "$lib/components/ui/avatar/index.js";
-
 
 	let { user, ref = $bindable(null), ...restProps }: ComponentProps<typeof Sidebar.Root> = $props();
 </script>
@@ -148,7 +176,7 @@
 			<Sidebar.MenuItem>
 				<Sidebar.MenuButton size="lg">
 					{#snippet child({ props })}
-						<a href="##" {...props}>
+						<a href="/" {...props}>
 							<Avatar.Root class="size-8 rounded-lg">
 								<Avatar.Image src={"/favicon.png"} alt={"McEasy"} />
 								<Avatar.Fallback class="rounded-lg">ME</Avatar.Fallback>
@@ -164,6 +192,7 @@
 		</Sidebar.Menu>
 	</Sidebar.Header>
 	<Sidebar.Content>
+		<NavDevops items={data.navDevOps} />
 		<NavMain items={data.navMain} />
 		<NavProjects projects={data.projects} />
 		<NavSecondary items={data.navSecondary} class="mt-auto" />
