@@ -2,6 +2,18 @@
   import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
   import { Separator } from "$lib/components/ui/separator/index.js";
   import * as Sidebar from "$lib/components/ui/sidebar/index.js";
+  import * as Card from "$lib/components/ui/card/index.js";
+  import * as Chart from "$lib/components/ui/chart/index.js";
+  import { BarChart } from "layerchart";
+
+  let { data } = $props<{ data: { dashboard: any[]; }}>();
+
+  const chartConfig = {
+    total: {
+      label: "Digest",
+      color: "#2563eb"
+    }
+  } satisfies Chart.ChartConfig;
 </script>
 
 <svelt:head>
@@ -28,10 +40,26 @@
 </header>
 
 <div class="flex flex-1 flex-col gap-4 p-4 pt-0">
-  <div class="grid auto-rows-min gap-4 md:grid-cols-3">
-    <div class="bg-muted/50 aspect-video rounded-xl"></div>
-    <div class="bg-muted/50 aspect-video rounded-xl"></div>
-    <div class="bg-muted/50 aspect-video rounded-xl"></div>
+
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-semibold">Statistics Build Image</h1>
   </div>
-  <div class="bg-muted/50 min-h-[100vh] flex-1 rounded-xl md:min-h-min"></div>
+
+  <Card.Root>
+    <Card.Content>
+      <Chart.Container config={chartConfig} class="min-h-[200px] w-full px-32">
+        <BarChart
+          orientation="horizontal"
+          data={data.dashboard} 
+          x="total" 
+          y="repo"
+        >
+          {#snippet tooltip()}
+            <Chart.Tooltip />
+          {/snippet}
+        </BarChart>
+      </Chart.Container>
+    </Card.Content>
+  </Card.Root>
+
 </div>

@@ -64,7 +64,7 @@
 						</div>
 					</div>
 				</DropdownMenu.Label>
-				<DropdownMenu.Separator />
+				<!-- <DropdownMenu.Separator />
 				<DropdownMenu.Group>
 					<DropdownMenu.Item>
 						<SparklesIcon />
@@ -85,7 +85,7 @@
 						<BellIcon />
 						Notifications
 					</DropdownMenu.Item>
-				</DropdownMenu.Group>
+				</DropdownMenu.Group> -->
 				<DropdownMenu.Separator />
 				<a href="/logout">
 					<DropdownMenu.Item>

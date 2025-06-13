@@ -5,8 +5,9 @@
 	import FrameIcon from "@lucide/svelte/icons/frame";
 	import LifeBuoyIcon from "@lucide/svelte/icons/life-buoy";
 	import MapIcon from "@lucide/svelte/icons/map";
-	import SendIcon from "@lucide/svelte/icons/send";
+	// import SendIcon from "@lucide/svelte/icons/send";
 	import Settings2Icon from "@lucide/svelte/icons/settings-2";
+	import GithubIcon from "@lucide/svelte/icons/github";
 	import SquareTerminalIcon from "@lucide/svelte/icons/square-terminal";
 
 	const data = {
@@ -18,14 +19,14 @@
 				isActive: true,
 			},
 			{
-				title: "Services",
-				url: "/services",
-				icon: FrameIcon,
-			},
-			{
 				title: "Digest",
 				url: "/digest",
 				icon: MapIcon,
+			},
+			{
+				title: "Services",
+				url: "/services",
+				icon: FrameIcon,
 			},
 			{
 				title: "Monitoring",
@@ -33,9 +34,9 @@
 				icon: SquareTerminalIcon,
 			},
 			{
-				title: "Settings",
-				url: "#",
-				icon: Settings2Icon,
+				title: "Github",
+				url: "https://github.com/mceasy-id",
+				icon: GithubIcon,
 			},
 		],
 		navMain: [
@@ -128,14 +129,14 @@
 		navSecondary: [
 			{
 				title: "Support",
-				url: "#",
+				url: "https://teams.microsoft.com/l/chat/0/0?users=ahmad.ardiansyah@mceasy.co.id",
 				icon: LifeBuoyIcon,
 			},
-			{
-				title: "Feedback",
-				url: "#",
-				icon: SendIcon,
-			},
+			// {
+			// 	title: "Feedback",
+			// 	url: "#",
+			// 	icon: SendIcon,
+			// },
 		],
 		projects: [
 			{
@@ -158,9 +159,9 @@
 </script>
 
 <script lang="ts">
-	import NavMain from "./nav-main.svelte";
+	// import NavMain from "./nav-main.svelte";
 	import NavDevops from "./nav-devops.svelte";
-	import NavProjects from "./nav-projects.svelte";
+	// import NavProjects from "./nav-projects.svelte";
 	import NavSecondary from "./nav-secondary.svelte";
 	import NavUser from "./nav-user.svelte";
 	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
@@ -193,8 +194,8 @@
 	</Sidebar.Header>
 	<Sidebar.Content>
 		<NavDevops items={data.navDevOps} />
-		<NavMain items={data.navMain} />
-		<NavProjects projects={data.projects} />
+		<!-- <NavMain items={data.navMain} /> -->
+		<!-- <NavProjects projects={data.projects} /> -->
 		<NavSecondary items={data.navSecondary} class="mt-auto" />
 	</Sidebar.Content>
 	<Sidebar.Footer>

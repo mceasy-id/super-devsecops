@@ -10,9 +10,15 @@
 
 <Toaster position="top-center" />
 
-<Sidebar.Provider>
-	<AppSidebar user={data.user} />
-	<Sidebar.Inset>
-		{@render children()}
-	</Sidebar.Inset>
-</Sidebar.Provider>
+{#if data.user}
+	<Sidebar.Provider>
+		<AppSidebar user={data.user} />
+		<Sidebar.Inset>
+			{@render children()}
+		</Sidebar.Inset>
+	</Sidebar.Provider>
+{:else}
+	{@render children()}
+{/if}
+
+

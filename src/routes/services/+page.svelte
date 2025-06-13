@@ -5,11 +5,11 @@
   import * as Table from "$lib/components/ui/table/index.js";
   import { toast } from "svelte-sonner";
 
-  let { data } = $props<{data: { digests: any[]}}>();
+  let { data } = $props<{data: { digest: any[]; }}>();
   
   const copyToClipboard = (digest: string) => {
     navigator.clipboard.writeText(digest);
-    toast.success("Digest copied to clipboard");
+    toast("Digest copied to clipboard");
   };
 </script>
 
@@ -29,7 +29,7 @@
         </Breadcrumb.Item>
         <Breadcrumb.Separator class="hidden md:block" />
         <Breadcrumb.Item>
-          <Breadcrumb.Page>Digest</Breadcrumb.Page>
+          <Breadcrumb.Page>Services</Breadcrumb.Page>
         </Breadcrumb.Item>
       </Breadcrumb.List>
     </Breadcrumb.Root>
@@ -41,21 +41,17 @@
     <Table.Root>
       <Table.Header>
         <Table.Row>
-        <Table.Head class="w-[12px]"></Table.Head>
+        <Table.Head>No</Table.Head>
         <Table.Head>Repository</Table.Head>
-        <Table.Head>Branch</Table.Head>
-        <Table.Head>Digest</Table.Head>
         <Table.Head>Created At</Table.Head>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {#each data.digests as service}
+        {#each data.digests as service, i}
           <Table.Row>
-            <Table.Cell><input type="checkbox" /></Table.Cell>
+            <Table.Cell>{i+1}</Table.Cell>
             <Table.Cell class="font-medium">{service.repo}</Table.Cell>
-            <Table.Cell>{service.branch}</Table.Cell>
-            <Table.Cell><button onclick={() => copyToClipboard(String(service.digest))} class="cursor-pointer">{String(service.digest).slice(0,60)}</button></Table.Cell>
-            <Table.Cell>{new Date(service.created_at).toLocaleString()}</Table.Cell>
+            <Table.Cell>{new Date(service.created_at)}</Table.Cell>
           </Table.Row>
         {/each}
       </Table.Body>
