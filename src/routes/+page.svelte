@@ -47,7 +47,7 @@
 
   <Card.Root>
     <Card.Content>
-      <Chart.Container config={chartConfig} class="min-h-[200px] w-full px-32">
+      <Chart.Container config={chartConfig} class="min-h-[200px] w-full px-36">
         <BarChart
           orientation="horizontal"
           data={data.dashboard} 

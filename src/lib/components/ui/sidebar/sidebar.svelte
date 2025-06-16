@@ -20,6 +20,7 @@
 			name: string;
 			email: string;
 			avatar_url: string;
+			type: "User" | "Bot";
 		} | null,
 		side?: "left" | "right";
 		variant?: "sidebar" | "floating" | "inset";

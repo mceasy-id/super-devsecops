@@ -199,6 +199,6 @@
 		<NavSecondary items={data.navSecondary} class="mt-auto" />
 	</Sidebar.Content>
 	<Sidebar.Footer>
-		<NavUser user={user ? { name: user.name, email: user.email ?? "", avatar_url: user.avatar_url } : null} />
+		<NavUser user={user ? { name: user.name ?? user.login, email: user.email ?? user.type, avatar_url: user.avatar_url } : null} />
 	</Sidebar.Footer>
 </Sidebar.Root>

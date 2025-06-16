@@ -2,8 +2,8 @@ import { fetchApi } from '$lib/rest/api';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async () => {
-  const { data: services } = await fetchApi(`/devsecops/repo/status`);
+  const { data: digests } = await fetchApi(`/devsecops/repo`);
   return {
-    services
+    digests
   };
 };

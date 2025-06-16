@@ -1,8 +1,11 @@
 <script lang="ts">
   import * as Breadcrumb from "$lib/components/ui/breadcrumb/index.js";
+	import { Input } from "$lib/components/ui/input";
   import { Separator } from "$lib/components/ui/separator/index.js";
   import * as Sidebar from "$lib/components/ui/sidebar/index.js";
   import * as Table from "$lib/components/ui/table/index.js";
+  import RefreshIcon from "@lucide/svelte/icons/refresh-ccw";
+  import * as ToggleGroup from "$lib/components/ui/toggle-group/index.js";
   import { toast } from "svelte-sonner";
 
   let { data } = $props<{data: { digests: any[]}}>();
@@ -11,6 +14,21 @@
     navigator.clipboard.writeText(digest);
     toast.success("Digest copied to clipboard");
   };
+
+  let cari = $state("");
+  let digests = $state(data.digests);
+
+  const refetchServices = async () => {
+    digests = data.digests;
+  };
+
+  $effect(() => {
+    if (cari.length > 0) {
+      digests = data.digests.filter((service: any) => service.repo.toLowerCase().includes(cari.toLowerCase()));
+    } else {
+      digests = data.digests;
+    }
+  });
 </script>
 
 <svelt:head>
@@ -37,6 +55,24 @@
 </header>
 
 <div class="flex flex-1 flex-col gap-4 p-4 pt-0">
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-semibold">Digest</h1>
+    <Input
+      type="text"
+      placeholder="Search services and enter"
+      class="w-64"
+      value={cari}
+      onchange={(e: any) => cari = e.target.value}
+      />
+    <div class="actions flex justify-between">
+      <ToggleGroup.Root variant="outline" type="multiple">
+        <ToggleGroup.Item value="table" aria-label="Table" onclick={() => refetchServices()}>
+          <RefreshIcon className="h-4 w-4" />
+        </ToggleGroup.Item>
+      </ToggleGroup.Root>
+    </div>
+  </div>
+
   <div class="grid auto-rows-min gap-4 grid-cols-1">
     <Table.Root>
       <Table.Header>
@@ -45,11 +81,11 @@
         <Table.Head>Repository</Table.Head>
         <Table.Head>Branch</Table.Head>
         <Table.Head>Digest</Table.Head>
-        <Table.Head>Created At</Table.Head>
+        <Table.Head>Last Build</Table.Head>
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {#each data.digests as service}
+        {#each digests as service}
           <Table.Row>
             <Table.Cell><input type="checkbox" /></Table.Cell>
             <Table.Cell class="font-medium">{service.repo}</Table.Cell>

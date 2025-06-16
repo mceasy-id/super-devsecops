@@ -8,6 +8,10 @@
 	import { Toaster } from "$lib/components/ui/sonner/index.js";
 </script>
 
+<svelte:head>
+	<title>DevSecOps</title>
+</svelte:head>
+
 <Toaster position="top-center" />
 
 {#if data.user}
