@@ -67,34 +67,35 @@
   }
 
   const actionDeployNow = async () => {
-    if (checkedServices.length === 0) {
+    if (deployServices.length === 0) {
       toast.warning("Please check the services first.");
     } else {
-      console.log(checkedServices);
-      // const promise = new Promise(async (resolve, reject) => {
-      //   const req = await fetch("https://n8n.mceasy.cloud/webhook/devsecops/repo/deploy", {
-      //     method: "POST",
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //     body: JSON.stringify(checkedServices),
-      //   });
-      //   const res = await req.json();
-      //   resolve(res);
-      // });
-      // toast.promise(promise, {
-      //   loading: "Deploying services...",
-      //   success: (res: any) => {
-      //     console.log(res);
-      //     checkedServices = [];
-      //     selectedServices = [];
-      //     return "Services deployed successfully!";
-      //   },
-      //   error: (err: any) => {
-      //     console.error(err);
-      //     return "Failed to deploy services.";
-      //   },
-      // });
+      console.log(deployServices);
+      const promise = new Promise(async (resolve, reject) => {
+        const result = data.digests.filter((item: any) => deployServices.includes(item.repo));
+        const req = await fetch("https://n8n.mceasy.cloud/webhook/devsecops/repo/deploy", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(result),
+        });
+        const res = await req.json();
+        resolve(res);
+      });
+      toast.promise(promise, {
+        loading: "Deploying services...",
+        success: (res: any) => {
+          deployServices = [];
+          selectedServices = [];
+          checkedServices = [];
+          return "Services deployed successfully!";
+        },
+        error: (err: any) => {
+          console.error(err);
+          return "Failed to deploy services.";
+        },
+      });
     }
   };
 
