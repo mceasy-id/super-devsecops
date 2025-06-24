@@ -5,7 +5,9 @@
 
 	let {
 		items,
+		title = "DevOps",
 	}: {
+		title?: string
 		items: {
 			title: string;
 			url: string;
@@ -20,7 +22,7 @@
 </script>
 
 <Sidebar.Group>
-	<Sidebar.GroupLabel>Platforms</Sidebar.GroupLabel>
+	<Sidebar.GroupLabel>{title}</Sidebar.GroupLabel>
 	<Sidebar.Menu>
 		{#each items as mainItem (mainItem.title)}
 			<Collapsible.Root open={mainItem.isActive}>

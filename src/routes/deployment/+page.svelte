@@ -171,6 +171,11 @@
       },
     });
   };
+
+  function extractSha256(input: string) {
+    const match = input.match(/sha256:[a-f0-9]{64}/i);
+    return match ? String(match[0]).slice(0, 16) : null;
+  }
 </script>
 
 <svelt:head>
@@ -206,8 +211,8 @@
             <Table.Head class="w-[12px]"></Table.Head>
             <Table.Head>No</Table.Head>
             <Table.Head>Repository</Table.Head>
+            <Table.Head class="text-right">Current</Table.Head>
             <Table.Head class="text-center">Status</Table.Head>
-            <Table.Head>Current</Table.Head>
             <Table.Head>Latest</Table.Head>
           </Table.Row>
         </Table.Header>
@@ -224,9 +229,9 @@
               </Table.Cell>
               <Table.Cell>{i+1}</Table.Cell>
               <Table.Cell class="font-medium cursor-pointer" onclick={() => selectedDeployService(service.repo)}>{service.repo}</Table.Cell>
+              <Table.Cell class="text-right"><button onclick={() => copyToClipboard(service.k8s)} class="cursor-pointer">{extractSha256(service.k8s)}</button></Table.Cell>
               <Table.Cell class="text-center">{service.k8s === service.db.digest ? "🟰" : "🟢"}</Table.Cell>
-              <Table.Cell><button onclick={() => copyToClipboard(service.k8s)} class="cursor-pointer">{String(service.k8s).slice(0, 60)}</button></Table.Cell>
-              <Table.Cell><button onclick={() => copyToClipboard(service.db.digest)} class="cursor-pointer">{String(service.db.digest).slice(0, 60)}</button></Table.Cell>
+              <Table.Cell><button onclick={() => copyToClipboard(service.db.digest)} class="cursor-pointer">{extractSha256(service.db.digest)}</button></Table.Cell>
             </Table.Row>
           {/each}
         </Table.Body>

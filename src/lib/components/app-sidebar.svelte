@@ -1,14 +1,9 @@
 <script lang="ts" module>
-	import BookOpenIcon from "@lucide/svelte/icons/book-open";
-	import BotIcon from "@lucide/svelte/icons/bot";
 	import ChartPieIcon from "@lucide/svelte/icons/chart-pie";
 	import FrameIcon from "@lucide/svelte/icons/frame";
 	import LifeBuoyIcon from "@lucide/svelte/icons/life-buoy";
 	import MapIcon from "@lucide/svelte/icons/map";
-	// import SendIcon from "@lucide/svelte/icons/send";
-	import Settings2Icon from "@lucide/svelte/icons/settings-2";
 	import GithubIcon from "@lucide/svelte/icons/github";
-	import SquareTerminalIcon from "@lucide/svelte/icons/square-terminal";
 
 	const data = {
 		navDevOps:[
@@ -29,11 +24,6 @@
 				icon: FrameIcon,
 			},
 			{
-				title: "Monitoring",
-				url: "https://monitoring.mceasy.com",
-				icon: SquareTerminalIcon,
-			},
-			{
 				title: "Github",
 				url: "https://github.com/mceasy-id",
 				icon: GithubIcon,
@@ -41,89 +31,39 @@
 		],
 		navMain: [
 			{
-				title: "Playground",
-				url: "#",
-				icon: SquareTerminalIcon,
+				title: "Kong Production",
+				url: "https://konga-gateway.mceasy.com",
+				icon: RocketIcon,
 				isActive: false,
-				items: [
-					{
-						title: "History",
-						url: "#",
-					},
-					{
-						title: "Starred",
-						url: "#",
-					},
-					{
-						title: "Settings",
-						url: "#",
-					},
-				],
 			},
 			{
-				title: "Models",
-				url: "#",
-				icon: BotIcon,
-				items: [
-					{
-						title: "Genesis",
-						url: "#",
-					},
-					{
-						title: "Explorer",
-						url: "#",
-					},
-					{
-						title: "Quantum",
-						url: "#",
-					},
-				],
+				title: "Kong Staging",
+				url: "https://konga-dev.mceasy.cloud",
+				icon: CloudMoonIcon,
+				isActive: false,
 			},
 			{
-				title: "Documentation",
+				title: "Kong BRI",
 				url: "#",
-				icon: BookOpenIcon,
-				items: [
-					{
-						title: "Introduction",
-						url: "#",
-					},
-					{
-						title: "Get Started",
-						url: "#",
-					},
-					{
-						title: "Tutorials",
-						url: "#",
-					},
-					{
-						title: "Changelog",
-						url: "#",
-					},
-				],
+				icon: BanknoteIcon,
+				isActive: false,
+			},
+		],
+		navMonitor: [
+			{
+				title: "Grafana kOps",
+				url: "https://monitoring.mceasy.com",
+				icon: ViewIcon,
 			},
 			{
-				title: "Settings",
-				url: "#",
-				icon: Settings2Icon,
-				items: [
-					{
-						title: "General",
-						url: "#",
-					},
-					{
-						title: "Team",
-						url: "#",
-					},
-					{
-						title: "Billing",
-						url: "#",
-					},
-					{
-						title: "Limits",
-						url: "#",
-					},
-				],
+				title: "Grafana EKS",
+				url: "https://grafana.mceasy.com",
+				icon: GitGraphIcon,
+			},
+			{
+				title: "Grafana Alibaba",
+				url: "https://monitoring.mceasy.cloud",
+				icon: SandwichIcon,
 			},
 		],
 		navSecondary: [
@@ -132,41 +72,19 @@
 				url: "https://teams.microsoft.com/l/chat/0/0?users=ahmad.ardiansyah@mceasy.co.id",
 				icon: LifeBuoyIcon,
 			},
-			// {
-			// 	title: "Feedback",
-			// 	url: "#",
-			// 	icon: SendIcon,
-			// },
-		],
-		projects: [
-			{
-				name: "Design Engineering",
-				url: "#",
-				icon: FrameIcon,
-			},
-			{
-				name: "Sales & Marketing",
-				url: "#",
-				icon: ChartPieIcon,
-			},
-			{
-				name: "Travel",
-				url: "#",
-				icon: MapIcon,
-			},
 		],
 	};
 </script>
 
 <script lang="ts">
-	// import NavMain from "./nav-main.svelte";
+	import NavMain from "./nav-main.svelte";
 	import NavDevops from "./nav-devops.svelte";
-	// import NavProjects from "./nav-projects.svelte";
 	import NavSecondary from "./nav-secondary.svelte";
 	import NavUser from "./nav-user.svelte";
 	import * as Sidebar from "$lib/components/ui/sidebar/index.js";
 	import type { ComponentProps } from "svelte";
 	import * as Avatar from "$lib/components/ui/avatar/index.js";
+	import { BanknoteIcon, CloudMoonIcon, GitGraphIcon, UserIcon, ViewIcon, RocketIcon, SandwichIcon } from "@lucide/svelte";
 
 	let { user, ref = $bindable(null), ...restProps }: ComponentProps<typeof Sidebar.Root> = $props();
 </script>
@@ -194,8 +112,8 @@
 	</Sidebar.Header>
 	<Sidebar.Content>
 		<NavDevops items={data.navDevOps} />
-		<!-- <NavMain items={data.navMain} /> -->
-		<!-- <NavProjects projects={data.projects} /> -->
+		<NavMain title={"Monitoring"} items={data.navMonitor} />
+		<NavMain title={"Gateway"} items={data.navMain} />
 		<NavSecondary items={data.navSecondary} class="mt-auto" />
 	</Sidebar.Content>
 	<Sidebar.Footer>

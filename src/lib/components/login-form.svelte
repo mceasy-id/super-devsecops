@@ -3,6 +3,7 @@
 	import * as Card from "$lib/components/ui/card/index.js";
 	import { cn } from "$lib/utils.js";
 	import type { HTMLAttributes } from "svelte/elements";
+	import { GithubIcon } from "@lucide/svelte";
 
 	let { class: className, ...restProps }: HTMLAttributes<HTMLDivElement> = $props();
 </script>
@@ -17,8 +18,8 @@
 			<div class="grid gap-6">
 				<div class="flex flex-col gap-4">
 					<a href="/auth/login">
-						<Button class="w-full h-12">
-							Github
+						<Button class="w-full h-12 bg-[#0b458c] cursor-pointer hover:bg-[#0b458c]">
+							<GithubIcon /> GITHUB
 						</Button>
 					</a>
 				</div>
